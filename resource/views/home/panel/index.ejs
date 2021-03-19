@@ -1,0 +1,81 @@
+<%- include('./head') -%>
+
+    <div class="container">
+        <ul class="nav nav-pills cnav-fill justify-content-center">
+            <li class="nav-item">
+              <a style="padding: 30px; background-color: rgb(184, 108, 184);" class="nav-link <%= req.url == '/user/panel' ? 'active' : ''  %>" href="/user/panel">اطلاعات کاربری</a>
+            </li>
+            <li class="nav-item">
+              <a style="padding: 30px" class="nav-link <%= req.url == '/user/panel/history' ? 'active' : ''  %>" href="/user/panel/history">پرداخت های انجام شده</a>
+            </li>
+            <li class="nav-item">
+              <a style="padding: 30px" class="nav-link <%= req.url == '/user/panel/vip' ? 'active' : ''  %>" href="/user/panel/vip">شارژ vip</a>
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="content-block mb-5">
+        <!-- Our Services ==== -->
+    <div class="section-area section-sp2 bg-fix join-bx" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center heading-bx text-white">
+                <h2 class="title-head m-b0"><b>مشخصات</b></h2>
+            </div>
+            <div class="col-12">
+                <div class="why-chooses-bx">
+                    <div class="ttr-accordion m-b30 faq-bx" id="accordion1">
+                        <div class="panel">
+                            <div class="acod-head">
+                                <h6 class="acod-title">
+                                    <ul style="margin: 20px">
+                                        <li><b>نام کاربری</b> : <b style="color: red;"><%= auth.user.name %></b></li>
+                                    </ul>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="acod-head">
+                                <h6 class="acod-title">
+                                    <ul style="margin: 20px">
+                                        <li><b>ایمیل کاربری</b> : <b style="color: red;"><%= auth.user.email %></b></li>
+                                    </ul>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="acod-head">
+                                <h6 class="acod-title">
+                                    <ul style="margin: 20px">
+                                        <% if(req.user.isVip()){ %>
+                                        <li><b>زمان پایان اعتبار ویژه</b> : <b style="color: red;"><%= time(req.user.vipTime).fromNow() %></b></li>
+                                        <% }else{ %> 
+                                            <li><b>زمان پایان اعتبار ویژه</b> : <b style="color: red;">شما عضو ویژه نیستید</b></li>
+                                        <% } %>  
+                                    </ul>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+
+
+<!-- ------------------------------------------------------------ -->
+
+<!-- <ul style="margin: 20px">
+    <li><b>نام کاربری</b> :<%= auth.user.name %></li>
+    <li><b>ایمیل کاربری</b> : <%= auth.user.email %></li>
+    <% if(req.user.isVip()){ %>
+        <li> <b> زمان پایان اعتبار ویژه</b> :  <%= time(req.user.vipTime).fromNow() %>  </li>
+    <% }else{ %> 
+        <li> <b> اعتبار ویژه</b> : شما عضو ویژه نیستید</li>
+    <% } %>  
+</ul> -->
+

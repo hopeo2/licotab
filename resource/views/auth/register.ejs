@@ -1,0 +1,112 @@
+<div class="page-wraper">
+  <div id="loading-icon-bx"></div>
+  <div class="account-form">
+    <div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
+      <a href="/"><img src="assets/images/logo-white-2.png" alt=""></a>
+    </div>
+    <div class="account-form-inner">
+      <div class="account-container">
+        <div class="heading-bx left">
+          <h2 class="title-head"> همین حالا  <span> عضو شوید</span></h2>
+          <p> ورود  <a href="/login"> کلیک کنید </a></p>
+        </div>
+        <form class="contact-bx" action="/register" method="POST" novalidate>
+          <% if(errors.length > 0){ %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span><i class="fas fa-times-circle"></i></span>
+              </button>
+                <% errors.forEach(err => { %> 
+                  <span style="font-family: iransans-medium;"><%= err %></span> <br> 
+                <% }) %> 
+            </div>
+            <% } %>  
+          <div class="row placeani">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <label for="name" class="control-label">نام</label>
+                  <input id="name" type="text" name="name" class="form-control" value="<%= old("name") %> " required="">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                    <label for="email" class="control-label">پست‌الکترونیک</label>
+                  <input id="email" type="email" name="email" class="form-control" value="<%= old("email") %>">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <label for="password" class="control-label">رمزعبور</label>
+                  <input id="password" type="password" name="password" class="form-control" value="" required="">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%- recaptcha %> 
+            </div>
+            <div class="col-lg-6 m-b30">
+              <button name="submit" type="submit" value="Submit" class="btn button-md">عضویت</button>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex">
+                <a class="btn flex-fill m-l5 google-plus button-md" href="/auth/google"><i class="fa fa-google-plus"></i>گوگل</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- --------------------------- -->
+  <!-- <div class="container">
+    <div class="row pt-5 justify-content-center">
+      <div class="col-sm-12 col-md-6">
+        <div class="card card-default">
+          <div class="card-header"><h5>عضویت</h5></div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/register" method="POST" novalidate>
+              <% if(errors.length > 0){ %>
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span><i class="fas fa-times-circle"></i></span>
+                </button>
+                  <% errors.forEach(err => { %> 
+                    <%= err %> <br> 
+                  <% }) %> 
+              </div>
+              <% } %>  
+              <div class="form-group">
+                <label for="name" class="control-label">نام</label>
+                <input id="name" type="text" name="name" class="form-control" value="<%= formData ? formData['name'] : '' %> " required="">
+              </div>
+              <div class="form-group">
+                <label for="email" class="control-label">ایمیل</label>
+                <input id="email" type="email" name="email" class="form-control" value="<%= formData ? formData['email'] : '' %>" required="">
+              </div>
+              <div class="form-group">
+                <label for="password" class="control-label">پسورد</label>
+                <input id="password" type="password" name="password" class="form-control" value="" required="">
+              </div>
+              <div class="form-group">
+                <%- recaptcha %> 
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">عضویت</button>
+                <a href="/auth/google" class="btn btn-danger"> ورود با اکانت گوگل <i class="fab fa-google"></i></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+   

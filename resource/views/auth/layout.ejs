@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <!-- META ============================================= -->
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- OG -->
+
+	<meta name="keywords" content="Web Design, Education, Institute, Study" />
+	<meta name="author" content="licotab" />
+	<meta name="description"
+		content="licotab is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute." />
+
+	<meta property="og:site_name" content="licotab : Education HTML Template" />
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="en_us" />
+	<meta property="og:title" content="licotab : Education HTML Template" />
+	<meta property="og:description"
+		content="licotab is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training center or other educational institute." />
+	<meta property="og:image" content="preview.png" />
+
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:creator" content="@licotab">
+	<meta name="twitter:title" content="licotab : Education HTML Template">
+	<meta name="twitter:description"
+		content="licotab is a Fully Creative Mobile Responsive HTML Template. It is designed specifically for University, College, School, Training centre or other educational institute.">
+
+	<meta name="format-detection" content="telephone=no">
+
+	<!-- FAVICONS ICON ============================================= -->
+	<link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png" />
+
+	<!-- PAGE TITLE HERE ============================================= -->
+	<title><%- title %> </title>
+
+	<!-- MOBILE SPECIFIC ============================================= -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.min.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    
+	<link rel="stylesheet" type="text/css" href="/assets/css/assets.css">
+
+	<!-- TYPOGRAPHY ============================================= -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/typography.css">
+
+	<!-- SHORTCODES ============================================= -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/shortcodes/shortcodes.css">
+
+	<!-- STYLESHEETS ============================================= -->
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/css/dist/css/bootstrap-rtl.min.css">
+	<link class="skin" rel="stylesheet" type="text/css" href="/assets/css/color/color-1.css">
+    
+</head>
+
+<body>
+
+
+    
+    <%- body %> 
+    
+
+    <!-- External JavaScripts -->
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/vendors/bootstrap/js/popper.min.js"></script>
+	<script src="/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+	<script src="/assets/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+	<script src="/assets/vendors/magnific-popup/magnific-popup.js"></script>
+	<script src="/assets/vendors/counter/waypoints-min.js"></script>
+	<script src="/assets/vendors/counter/counterup.min.js"></script>
+	<script src="/assets/vendors/imagesloaded/imagesloaded.js"></script>
+	<script src="/assets/vendors/masonry/masonry.js"></script>
+	<script src="/assets/vendors/masonry/filter.js"></script>
+	<script src="/assets/vendors/owl-carousel/owl.carousel.js"></script>
+	<script src="/assets/js/functions.js"></script>
+	<script src="/assets/js/contact.js"></script>
+	<script src='/assets/vendors/switcher/switcher.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <% let sweetalert = req.flash('sweetalert'); %>
+    <%   if(sweetalert.length){ %>
+    <% let data = sweetalert[0] %>  
+    <script>
+        Swal.fire({
+            title: '<%= data.title %>',
+            text: '<%= data.message %>',
+            icon: '<%= data.icon %>',
+            type: '<%= data.type %>',
+            showConfirmButton: <%= data.button !== null ? true : false %>,
+            confirmButtonText: '<%= data.button %>',
+            timer: <%= data.button !== null ? 'null' : data.timer %>,
+        })
+    </script>
+    <% } %> 
+	<script>
+		$(document).ready(function(){
+    		$('.swal2-select').remove();
+		});
+	</script>
+</body>
+
+</html>

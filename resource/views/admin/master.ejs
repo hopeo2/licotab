@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="نمایشport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%- defineContent('title') || 'پنل مدیریت'  %></title>
+    <link href="/css/dist/css/component-chosen.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/panel-admin">پنل مدیریت</a>
+    
+    <ul class="navbar-nav px-3" style="background-color: #272C30;">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/">خروج</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      
+        <main role="main" class="col-md-9 mr-sm-auto col-lg-10 pt-3 px-4">
+            <%- body %>
+        </main>
+        
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="/panel-admin">
+                  <span data-feather="home"></span>
+                  داشبورد
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/categories">
+                  <span data-feather="file"></span>
+                  دسته بندی ها
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/courses">
+                  <span data-feather="shopping-cart"></span>
+                  دورها
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users">
+                  <span data-feather="users"></span>
+                  کاربران
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/users/permissions">
+                  <span data-feather="bar-chart-2"></span>
+                  دسترسی ها
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/comments">
+                  <span data-feather="layers"></span>
+                  نظرات
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+
+    </div>
+  </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/js/holder.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.6/chosen.jquery.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>
+      CKEDITOR.replace('body', {
+        filebrowserUploadUrl: "/admin/upload-image",
+      });
+      $('.form-control-chosen').chosen({});
+    </script>
+    <script>
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["یکشبنه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنجشنبه", "جمعه", "شنبه"],
+            datasets: [{
+            data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+            }]
+        },
+        options: {
+            scales: {
+            yAxes: [{
+                ticks: {
+                beginAtZero: false
+                }
+            }]
+            },
+            legend: {
+            display: false,
+            }
+        }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+    <% let sweetalert = req.flash('sweetalert'); %>
+    <%   if(sweetalert.length){ %>
+    <% let data = sweetalert[0] %> 
+    <script>
+        Swal.fire({
+            title: '<%= data.title %>',
+            text: '<%= data.message %>',
+            icon: '<%= data.icon %>',
+            type: '<%= data.type %>',
+            showConfirmButton: <%= data.button !== null ? true : false %>,
+            cancelButtonText: '<%= data.button %>',
+            timer: <%= data.button !== null ? 'null' : data.timer %>
+        })
+    </script>
+    <% } %> 
+</body>
+</html> 

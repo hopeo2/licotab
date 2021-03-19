@@ -1,0 +1,141 @@
+<div class="page-wraper">
+  <div id="loading-icon-bx"></div>
+  <div class="account-form">
+    <div class="account-head" style="background-image:url(assets/images/background/bg2.jpg);">
+      <a href="/"><img src="assets/images/logo-white-2.png" alt=""></a>
+    </div>
+    <div class="account-form-inner">
+      <div class="account-container">
+        <div class="heading-bx left">
+          <h2 class="title-head">ورود به  <span> اکانت </span></h2>
+          <p>اکانت ندارید? <a href="/register"> همین حالا بسازید </a></p>
+        </div>
+        <form class="contact-bx" action="/login" method="POST" novalidate>
+          <% if(errors.length > 0){ %>
+            <div dir="rtl" class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span><i class="fas fa-times-circle"></i></span>
+              </button>
+                <% errors.forEach(err => { %> 
+                  <span style="font-family: iransans-medium;"><%= err %></span> <br> 
+                <% }) %> 
+            </div>
+            <% } %>  
+            <% if(success.length > 0){ %>
+              <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span><i class="fas fa-times-circle"></i></span>
+                </button>
+                  <% success.forEach(err => { %> 
+                    <span style="font-family: iransans-medium;"><%= err %></span> <br> 
+                  <% }) %> 
+              </div>
+              <% } %> 
+          <div class="row placeani">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <label for="email" class="control-label">ایمیل</label>
+                  <input id="email" type="email" name="email" value="<%= old("email") %>" required="" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                  <label for="password" class="control-label">رمزعبور</label>
+                  <input id="password" type="password" name="password" class="form-control" value="" required="">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group form-forget">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="remember" class="custom-control-input" id="remember">
+                  <label class="custom-control-label" for="remember">مرا به خاطر بسپار</label>
+                </div>
+                <a href="/password/reset" class="ml-auto">فراموشی رمزعبور؟</a>
+              </div>
+            </div>
+            <div class="form-group">
+              <%- recaptcha %> 
+            </div>
+            <div class="col-lg-6 m-b30">
+              <button name="submit" type="submit" value="Submit" class="btn button-md">ورود</button>
+            </div>
+            <div class="col-lg-6">
+              <div class="d-flex">
+                <a class="btn flex-fill m-l5 google-plus button-md" href="/auth/google"><i class="fa fa-google-plus"></i>گوگل</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- ------------------------- -->
+  <!-- <div class="container">
+    <div class="row pt-3 justify-content-center">
+      <div class="col-sm-12 col-md-6">
+        <div class="card card-default">
+          <div class="card-header"><h5>ورود</h5></div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/login" method="POST" novalidate>
+              <% if(errors.length > 0){ %>
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span><i class="fas fa-times-circle"></i></span>
+                </button>
+                  <% errors.forEach(err => { %> 
+                    <%= err %> <br> 
+                  <% }) %> 
+              </div>
+              <% } %>  
+              <% if(success.length > 0){ %>
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span><i class="fas fa-times-circle"></i></span>
+                  </button>
+                    <% success.forEach(err => { %> 
+                      <%= err %> <br> 
+                    <% }) %> 
+                </div>
+                <% } %>  
+              <div class="form-group">
+                <label for="email" class="control-label">ایمیل</label>
+                <input id="email" type="email" name="email" class="form-control" value="<%= formData ? formData['email'] : '' %>" required="">
+              </div>
+              <div class="form-group">
+                <label for="password" class="control-label">پسورد</label>
+                <input id="password" type="password" name="password" class="form-control" value="" required="">
+              </div>
+              <div class="form-group">
+                <div class="checkbox">
+                  <input id="remember" type="checkbox" name="remember">
+                  <label for="remember"> مرا به خاطر داشته باش</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <%- recaptcha %> 
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">ورود</button>
+                <a href="/auth/google" class="btn btn-danger"> ورود با اکانت گوگل <i class="fab fa-google"></i></a>
+                <a href="/password/reset" class="btn btn-link">رمز عبور خود را فراموش کرده ام
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+   
+
+

@@ -1,0 +1,28 @@
+<h2 class="mb-4">بخش محصولات</h2>
+<div class="table-responsive" style="border-radius: 12px">
+    <table class="table table-striped" style="border: 4px solid #343d4e;">
+        
+        <thead>
+            <tr>
+                <th style="border-left: 1px solid #343d4e;"># ایجاد کننده</th>
+                <th style="border-left: 1px solid #343d4e;">نام محصول</th>
+                <th style="border-left: 1px solid #343d4e;"> قیمت محصول </th>
+                <th style="border-left: 1px solid #343d4e;"> نوع پرداختی </th>
+                <th> تعداد بازدید </th>
+            </tr>
+        </thead>
+        <% courses.docs.forEach((course)=> { %>  
+        <tbody>
+            <tr>
+                <td style="background-color: #7c7c7c; color: white;"><%= course.user.name %> </td>
+                <td><%= course.title %></td>
+                <td style="background-color: #7c7c7c; color: white;"><%= course.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); %> تومان</td>
+                <td><%= course.type %></td>
+                <td style="background-color: #7c7c7c; color: white;"><%= course.viewCount %></td>
+            </tr>
+        </tbody>
+        <% }) %> 
+    </table>
+</div>
+
+<%- include('../pagination.ejs', {pagination: courses}) %> 

@@ -1,0 +1,29 @@
+<%- include('./head') -%>
+
+<div class="container">
+    <ul class="nav nav-pills cnav-fill justify-content-center">
+        <li class="nav-item">
+          <a style="padding: 30px; " class="nav-link <%= req.url == '/user/panel' ? 'active' : ''  %>" href="/user/panel">اطلاعات کاربری</a>
+        </li>
+        <li class="nav-item">
+          <a style="padding: 30px" class="nav-link <%= req.url == '/user/panel/history' ? 'active' : ''  %>" href="/user/panel/history">پرداخت های انجام شده</a>
+        </li>
+        <li class="nav-item">
+          <a style="padding: 30px; background-color: rgb(184, 108, 184);" class="nav-link <%= req.url == '/user/panel/vip' ? 'active' : ''  %>" href="/user/panel/vip">شارژ vip</a>
+        </li>
+    </ul>
+</div>
+
+<div class="content-block container mb-5">
+  <div class="mt-4">
+    <form action="/user/panel/vip/payment" method="POST" class="d-flex justify-content-between">
+        <select name="plan" id="plan" class="mdb-select md-form w-50">
+            <option value="1">30,000 یک ماهه</option>
+            <option value="3">50,000 سه ماهه</option>
+            <option value="12">90,000 دوازده ماهه</option>
+        </select>
+        <button type="submit" class="btn btn-dark mt-2">افزایش اعتبار</button>
+    </form>
+</div>
+
+</div>

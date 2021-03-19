@@ -1,0 +1,329 @@
+<div class="row">
+  <!-- Blog Post Content Column -->
+  <div class="col-lg-8">
+    <!-- Title -->
+    <h1 class="mb-3"><%= course.title %></h1>
+
+    <!-- Author -->
+    <p class="text-muted small">
+      <span> توسط <a href="#"> <%= course.user.name %> </a></span>
+      -
+      <span
+      </span>
+    </p>
+
+    <hr />
+    <!-- Post Content -->
+    <div id="content"><%- course.body %></div>
+    <hr />
+
+    <% if(auth.check) { %> <% if(course.type=='vip' ) { if(! req.user.isVip()) { %>
+    <div class="alert alert-danger">
+      برای مشاهده این دوره نیاز است عضویت ویژه را تهیه کنید
+    </div>
+    <% } } else if(course.type=='cash' ) { if(! req.user.isBuy(course.id)) { %>
+    <div class="alert alert-danger">
+      برای مشاهده این دوره نیاز است بصورت نقدی دوره راه تهیه کنید
+    </div>
+    <% } else { %>
+    <div class="alert alert-success">شما در این دوره ثبت نام کرده اید</div>
+    <% } } } else { %>
+    <div class="alert alert-danger">
+      برای مشاهده این دوره نیاز است ابتدا وارد سایت شوید
+    </div>
+    <% } %>
+
+    <h3>قسمت های دوره</h3>
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          <th>شماره قسمت</th>
+          <th>عنوان قسمت</th>
+          <th>زمان قسمت</th>
+          <th>دانلود</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% course.episodes.forEach(episode=> { %>
+        <tr>
+          <th>
+            <a href="/courses/آموزش-پروژه-محور-bootstrap-1/1">
+              <%= episode.number %>
+            </a>
+          </th>
+          <td><%= episode.title %></td>
+          <td><%= episode.time %></td>
+          <td>
+            <a href="<%= episode.download(req.isAuthenticated(), req.user) %>"
+              >دانلود</a
+            >
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <!-- Blog Comments -->
+    <hr />
+    <!-- Comments Form -->
+
+    <% if(auth.check){ %>
+    <div class="card my-4">
+      <h5 class="card-header">ثبت نظر :</h5>
+      <div class="card-body">
+        <% if(errors.length> 0){ %>
+        <div dir="rtl" class="alert alert-danger alert-dismissable">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span><i class="fas fa-times-circle"></i></span>
+          </button>
+          <% errors.forEach(err=> { %>
+          <span style="font-family: iransans-medium"> <%= err %> </span> <br />
+          <% }) %>
+        </div>
+        <% } %> <% if(success.length> 0){ %>
+        <div class="alert alert-success alert-dismissable">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span><i class="fas fa-times-circle"></i></span>
+          </button>
+          <% success.forEach(err=> { %>
+          <span style="font-family: iransans-medium"> <%= err %> </span> <br />
+          <% }) %>
+        </div>
+        <% } %>
+        <form role="form" action="/comment" method="post">
+          <input
+            type="hidden"
+            name="<%= course.constructor.modelName.toLowerCase() %>"
+            value="<%= course.id %>"
+          />
+          <div class="form-group">
+            <textarea name="comment" class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">ارسال</button>
+        </form>
+      </div>
+    </div>
+    <% } %>
+
+    <hr />
+
+    <h4>تعداد کامنت این پست: <%= course.commentCount %></h4>
+    <% course.comments.forEach(comment=> {%>
+    <div class="media mb-4">
+      <img
+        class="d-flex ml-3 rounded-circle"
+        src="http://placehold.it/50x50"
+        alt=""
+      />
+      <div class="media-body">
+        <h5 class="mt-0">
+          <%= comment.user.name %> 
+          <% if(auth.check){ %>
+            <button
+            class="float-left btn-sm btn btn-xs btn-success"
+            data-toggle="modal"
+            data-target="#sendCommentModal"
+            data-parent="<%= comment.id %>"
+            >
+            پاسخ
+            </button>
+          <% } %>
+        </h5>
+        <%= comment.comment %>
+        <hr />
+        <small class="text-muted">
+          <%= time(comment.createdAt).fromNow() %>
+        </small>
+
+        <% comment.comments.forEach(comment=> { %>
+        <div class="media mt-4">
+          <img
+            class="d-flex ml-3 rounded-circle"
+            src="http://placehold.it/50x50"
+            alt=""
+          />
+          <div class="media-body">
+            <h5 class="mt-0"><%= comment.user.name %></h5>
+            <%= comment.comment %>
+            <hr />
+            <small class="text-muted">
+              <%= time(comment.createdAt).fromNow() %>
+            </small>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <% }) %>
+    <!-- Comment -->
+
+    <div
+      class="modal fade"
+      id="sendCommentModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="sendCommentModalLabel"
+      aria-hidden="true"
+      style="display: none"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">ارسال پاسخ</h4>
+            <button
+              type="button"
+              class="close"
+              style="margin-left: -1rem"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/comment" method="post">
+              <input type="hidden" name="parent" value="" />
+              <input
+                type="hidden"
+                name="<%= course.constructor.modelName.toLowerCase() %>"
+                value="<%= course.id %>"
+              />
+
+              <div class="form-group">
+                <label for="message-text" class="control-label"
+                  >متن پاسخ:</label
+                >
+                <textarea
+                  class="form-control"
+                  id="message-text"
+                  name="comment"
+                ></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">ارسال</button>
+                <button
+                  type="button"
+                  class="btn btn-default mr-2 ml-0"
+                  data-dismiss="modal"
+                >
+                  انصراف
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog Sidebar Widgets Column -->
+
+  <div class="col-md-4">
+    
+    <% if(auth.check) { %> 
+      <% if(course.type =='vip') {
+          if(req.user.isVip()) { %>
+              <div class="card my-4">
+                  <div class="card-body">
+                      <p>شما عضو ویژه هستید بنابراین میتوانید از این دوره استفاده کنید</p>
+                  </div>
+              </div>
+          <% } else { %> 
+              <div class="card my-4">
+                  <div class="card-body">
+                      <a href="#">برای مشاهده این دوره نیاز است عضویت ویژه را تهیه کنید</a>
+                  </div>
+              </div>
+          <% }
+      } else if(course.type =='cash') { 
+          if(req.user.isBuy(course.id)) { %>
+              <div class="card my-4">
+                  <div class="card-body">
+                      <p>شما در این دوره ثبت نام کرده اید</p>
+                  </div>
+              </div>
+          <% } else { %> 
+              <div class="card my-4">
+                  <div class="card-body">
+                      <p>برای استفاده از این دوره نیاز است این دوره را با مبلغ <%= course.price %> تومان خریداری کنید</p>
+                      <form action="/all-course/payment" method="post">
+                          <input type="hidden" name="course" value="<%= course.id %>">
+                          <button type="submit" class="btn btn-success">خرید دوره</button>
+                      </form>
+                  </div>
+              </div>
+          <% }
+      } else { %> 
+          <div class="card my-4">
+              <div class="card-body">
+                  <p>این دوره رایگان است</p>
+              </div>
+          </div>
+      <% }
+  } else { %>
+      <div class="card my-4">
+          <div class="card-body">
+              <a href="/login">برای مشاهده این دوره نیاز است ابتدا وارد سایت شوید</a>
+          </div>
+      </div>
+  <% } %>
+
+    <!-- Search Widget -->
+    <div class="card my-4">
+      <h5 class="card-header">جستجو</h5>
+      <div class="card-body">
+        <form class="input-group" action="/all-course" method="GET">
+          <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="دنبال چی میگردی ؟"
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="submit">جستجو!</button>
+          </span>
+        </form>
+      </div>
+    </div>
+
+    <!-- Categories Widget -->
+    <div class="card my-4">
+      <h5 class="card-header">دسته بندی ها</h5>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <ul class="list-unstyled mb-0">
+              <% categories.forEach(category=> { %>
+              <li>
+                <a href="/all-course?category=<%= category.slug %>">
+                  <%= category.name %>
+                </a>
+                <% if(category.childs){ %>
+                <ul>
+                  <% category.childs.forEach(cate => { %>
+                  <li>
+                    <a href="/all-course?category=<%= cate.slug %>"
+                      ><%= cate.name %></a
+                    >
+                  </li>
+                  <% }) %>
+                </ul>
+                <% } %>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

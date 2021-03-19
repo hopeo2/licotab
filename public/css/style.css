@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Vazir;
+    src: url('Vazir-Medium.eot');
+    src: url('../fonts/Vazir-Medium-FD.woff2') format('woff2'),
+         url('../fonts/Vazir-Medium-FD.woff') format('woff'),
+         url('../fonts/Vazir-Medium-FD.ttf') format('ttf');
+    font-weight: 500;
+    font-style: normal;
+}
+
+body {
+    font-family: Vazir !important;
+    font-size: .875rem;
+}
+.g-recaptcha {
+    width: desired_width;
+    border-radius: 4px;
+    border-right: 1px solid #d8d8d8;
+    overflow: hidden;
+}

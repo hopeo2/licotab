@@ -1,0 +1,59 @@
+{
+  "name": "licotab-v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/saman.oz/licotab-v1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/saman.oz/licotab-v1/issues"
+  },
+  "homepage": "https://gitlab.com/saman.oz/licotab-v1#readme",
+  "dependencies": {
+    "auto-bind": "^4.0.0",
+    "axios": "^0.21.1",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "connect-roles": "^3.1.2",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-recaptcha": "^5.0.2",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.9.2",
+    "i18n": "^0.13.2",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mkdirp": "^1.0.4",
+    "moment-jalali": "^0.3.9",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.15",
+    "mongoose-paginate-v2": "^1.3.16",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "rss": "^1.2.2",
+    "sharp": "^0.27.2",
+    "sitemap": "^6.4.0",
+    "sprintf-js": "^1.1.2",
+    "striptags": "^3.1.1",
+    "unique-string": "^2.0.0",
+    "validator": "^13.5.2"
+  }
+}

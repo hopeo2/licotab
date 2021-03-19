@@ -1,0 +1,107 @@
+
+<div class="page-wraper">
+  <div id="loading-icon-bx"></div>
+  <div class="account-form">
+    <div class="account-head" style="background-image:url(/assets/images/background/bg2.jpg);">
+      <a href="/"><img src="/assets/images/logo-white-2.png" alt=""></a>
+    </div>
+    <div class="account-form-inner">
+      <div class="account-container">
+        <div class="heading-bx left">
+          <h2 class="title-head">فراموشی <span>رمز عبور</span></h2>
+          <p>وارد شوید<a href="/login">کلیک کنید</a></p>
+        </div>
+        <form class="contact-bx" action="/password/email" method="POST" novalidate>
+          <% if(errors.length > 0){ %>
+            <div class="alert alert-danger alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span><i class="fas fa-times-circle"></i></span>
+              </button>
+                <% errors.forEach(err => { %> 
+                  <span style="font-family: iransans-medium;"><%= err %></span> <br> 
+                <% }) %> 
+            </div>
+            <% } %>  
+            <!-- ---------------------------------------------------- -->
+            <% if(success.length > 0){ %>
+              <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span><i class="fas fa-times-circle"></i></span>
+                </button>
+                  <% success.forEach(err => { %> 
+                    <span style="font-family: iransans-medium;"><%= err %></span> <br> 
+                  <% }) %> 
+              </div>
+              <% } %>
+          <div class="row placeani">
+            <div class="col-lg-12">
+              <div class="form-group">
+                <div class="input-group">
+                    <label for="email" class="control-label">پست‌الکترونیک</label>
+                  <input id="email" type="email" name="email" class="form-control" value="<% old("email") %> ">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <%- recaptcha %> 
+            </div>
+            <div class="col-lg-12 m-b30">
+              <button name="submit" type="submit" value="Submit" class="btn button-md">ارسال</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- -*------------------ -->
+  <!-- <div class="container">
+    <div class="row pt-3 justify-content-center">
+      <div class="col-6">
+        <div class="card card-default">
+          <div class="card-header"><h5>فراموشی رمز عبور</h5></div>
+          <div class="card-body">
+            <form class="form-horizontal" action="/password/email" method="POST" novalidate>
+              <% if(errors.length > 0){ %>
+              <div class="alert alert-danger alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span><i class="fas fa-times-circle"></i></span>
+                </button>
+                  <% errors.forEach(err => { %> 
+                    <%= err %> <br> 
+                  <% }) %> 
+              </div>
+              <% } %>  
+              
+              <% if(success.length > 0){ %>
+                <div class="alert alert-success alert-dismissable">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span><i class="fas fa-times-circle"></i></span>
+                  </button>
+                    <% success.forEach(err => { %> 
+                      <%= err %> <br> 
+                    <% }) %> 
+                </div>
+                <% } %>  
+              <div class="form-group">
+                <label for="email" class="control-label">ایمیل</label>
+                <input id="email" type="email" name="email" class="form-control" value="" required="">
+              </div>
+              <div class="form-group">
+                <%- recaptcha %> 
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary">بازیابی رمز عبور</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+   
+
+

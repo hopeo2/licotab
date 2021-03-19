@@ -1,0 +1,93 @@
+<% let { search , type , order , category } = req.query %>
+
+  <div class="d-flex">
+    <form class="col-8" action="/all-course" method="GET">
+
+      <% if(search){ %>
+        <div class="form-group col-md-3">
+          <input type="hidden" name="search" value="<%= search %>">
+          <span>عبارت جستجو شده : <%= search %> <a href="/all-course?<%= type ? "type=" + type : '' %><%= order ? "&order=" + order : '' %>" class="btn btn-sm btn-dark">حذف</a></span>
+        </div>
+      <% } %>
+  
+  
+          <div class="form-group col-md-3">
+            <select name="type" class="form-control">
+              <option value="all" <%= type === 'all' ? 'selected' : '' %>>همه دوره ها</option>
+              <option value="vip" <%= type === 'vip' ? 'selected' : '' %> >اعضای ویژه</option>
+              <option value="cash" <%= type === 'cash' ? 'selected' : '' %> >نقدی</option>
+              <option value="free" <%= type === 'free' ? 'selected' : '' %> >رایگان</option>
+            </select>
+          </div>
+  
+          <div class="form-group col-md-3">
+            <select name="category" class="form-control">
+                <option value="all">همه دسته ها</option>
+                <% categories.forEach(cate => { %>
+                    <option value="<%= cate.slug %>" <%= cate.slug === category ? 'selected' : '' %> ><%= cate.name %></option>
+                <% }) %>
+            </select>
+          </div>
+  
+  
+          <div class="form-group col-md-3">
+            <label class="checkbox-inline">
+              <input type="checkbox" name="order" value="1" class="ml-2" <%= order === '1' ? 'checked' : '' %>>جدیدترین مطالب
+            </label>
+          </div>
+  
+          <div class="form-group col-md-3">
+            <button class="btn btn-danger" type="submit">فیلتر</button>
+          </div>
+    </form>
+    <!-- Search Widget -->
+    <div class="card my-4 col-4">
+      <h5 class="card-header">جستجو</h5>
+      <div class="card-body">
+        <form class="input-group" action="/all-course" method="GET">
+          <input
+            type="text"
+            class="form-control"
+            name="search"
+            placeholder="دنبال چی میگردی ؟"
+          />
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="submit">جستجو!</button>
+          </span>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <% if(courseSearch.docs.length){ %>
+    <div class="row">
+      <% courseSearch.docs.forEach(course=> { %>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <img class="card-img-top" src="<%= course.thumb %>" alt="<%= course.title %>">
+            <div class="card-body">
+              <h3><a href="<%= course.path() %>">
+                  <%= course.title %>
+                </a></h3>
+              <p class="card-text">
+                <%- course.body.substr(0,100) %>
+              </p>
+              <a href="<%= course.path() %>" class="btn btn-primary btn-sm">اطلاعات بیشتر</a>
+            </div>
+            <div class="card-footer text-muted">
+              <%= course.viewCount %> بازدید
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  <% }else{ %>
+    <div class="row">
+      <h3>دوره ای یافت نشد</h3>
+    </div>
+  <% } %>   
+
+
+  <%- include ('../pagination.ejs', {pagination: courseSearch}) %>

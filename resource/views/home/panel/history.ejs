@@ -1,0 +1,43 @@
+<%- include('./head') -%>
+
+<div class="container">
+    <ul class="nav nav-pills cnav-fill justify-content-center">
+        <li class="nav-item">
+          <a style="padding: 30px; " class="nav-link <%= req.url == '/user/panel' ? 'active' : ''  %>" href="/user/panel">اطلاعات کاربری</a>
+        </li>
+        <li class="nav-item">
+          <a style="padding: 30px; background-color: rgb(184, 108, 184);" class="nav-link <%= req.url == '/user/panel/history' ? 'active' : ''  %>" href="/user/panel/history">پرداخت های انجام شده</a>
+        </li>
+        <li class="nav-item">
+          <a style="padding: 30px" class="nav-link <%= req.url == '/user/panel/vip' ? 'active' : ''  %>" href="/user/panel/vip">شارژ vip</a>
+        </li>
+    </ul>
+</div>
+
+
+<div class="content-block">
+    <div style="margin: 20px;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>مقدار پرداخت</th>
+                    <th>بابت</th>
+                    <th>وضعیت پرداخت</th>
+            </tr></thead>
+            <tbody>
+                
+                <% payments.docs.forEach(payment => { %> 
+                    <tr>
+                        <td><%= payment.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); %> تومان</td>
+                        <td><%= payment.vip ? ' خریداری عضویت ویژه' : `خرید دوره ${payment.course.title}` %></td>
+                        <td class="<%= payment.payment  ? 'text-success' : 'text-danger' %>"><%= payment.payment ? 'موفق' : 'ناموفق' %></td>
+                    </tr>
+                <% }) %>
+    
+            </tbody>
+        </table>
+    
+        <%- include('../../pagination' ,{ pagination : payments}) %>
+    
+    </div>
+</div>

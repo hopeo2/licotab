@@ -1,0 +1,104 @@
+<!-- Header Top ==== -->
+<header class="header rs-nav">
+    <div class="top-bar">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="topbar-left">
+                    <ul>
+                        <li><a href="/about-me"><i class="fa fa-question-circle"></i>از ما بپرسید</a></li>
+                        <% if(req.user){ %> 
+                            <li><a href="#"> خوش آمدی <b style="color: red;"><%= req.user.name %></b></a></li>
+                        <% }else{ %>
+                            <li><a href="#"> خوش آمدی <b>میهمان عزیز</b></a></li>
+                        <% } %>   
+                    </ul>
+                </div>
+                <div class="topbar-right">
+                    <ul>
+                        <% if(auth.check){ %>
+                            <% if(req.user.admin){ %>
+                                <li><a href="/panel-admin">پنل ادمین</a></li>
+                                <li><a href="/user/panel">پنل کاربری</a></li>
+                            <% }else{ %>
+                                <li><a href="/user/panel">پنل کاربری</a></li>
+                            <% } %>  
+                            <li><a class="text-danger" href="/logout">خروج</a></li>
+                        <% }else{ %>
+                            <li><a href="/login">ورود</a></li>
+                            <li><a href="/register">ثبت‌نام</a></li>
+                        <% } %>  
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sticky-header navbar-expand-lg">
+        <div class="menu-bar clearfix">
+            <div class="container clearfix">
+                <!-- Header Logo ==== -->
+                <div class="menu-logo">
+                    <a href="/"><img src="assets/images/logo.png" alt=""></a>
+                </div>
+                <!-- Mobile Nav Button ==== -->
+                <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse"
+                    data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Author Nav ==== -->
+                <div class="secondary-menu">
+                    <div class="secondary-inner">
+                        <ul>
+                            <li><a href="#" class="btn-link"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="btn-link"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#" class="btn-link"><i class="fa fa-linkedin"></i></a></li>
+                            <!-- Search Button ==== -->
+                            <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i
+                                        class="fa fa-search"></i></button></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Search Box ==== -->
+                <div class="nav-search-bar">
+                    <form action="/all-course" method="GET">
+                        <input name="search" value="" type="text" class="form-control" placeholder="جستجو...">
+                        <span><i class="ti-search"></i></span>
+                    </form>
+                    <span id="search-remove"><i class="ti-close"></i></span>
+                </div>
+                <!-- Navigation Menu ==== -->
+                <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
+                    <div class="menu-logo">
+                        <a href="index.html"><img src="assets/images/logo.png" alt=""></a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="<%= req.url == '/' ? 'active' : ''%> "><a href="/">خانه اصلی</a></li>
+                        
+                        <li class="add-mega-menu <%= req.url == '/all-course' ? 'active' : '' %>"><a href="/all-course">دوره‌های ما </a> </li>
+                        
+                        <li><a href="/about-me">درباره ما </a></li>
+                    </ul>
+                    <div class="nav-social-link">
+                        <a href="javascript:;"><i class="fa fa-facebook"></i></a>
+                        <a href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                        <a href="javascript:;"><i class="fa fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <!-- Navigation Menu END ==== -->
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Header Top END ==== -->
+
+
+
+
+
+
+
+<!-- ---------------------------------------------------------------- -->
+
+
